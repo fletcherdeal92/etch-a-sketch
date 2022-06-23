@@ -5,16 +5,14 @@
 
 div#container {
     display: grid;
-    grid-gap: .15em;
     grid-template-rows: repeat(var(--grid-rows), 1fr);
     grid-template-columns: repeat(var(--grid-cols), 1fr);
-    width: 25%;
+    width: 600px;
+    height: 600px;
 }
 
 div.grid-item {
-    border: 1px solid black;
-    padding: 1em;
-    padding-top: 50%;
+    border: .05px solid lightslategray;
 }
 
 #clear {
