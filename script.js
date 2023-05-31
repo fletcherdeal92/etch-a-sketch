@@ -2,9 +2,18 @@
 // create a webpage with a grid of 16x16 when website loads
 
 let gridSize = 20;
+const defaultColor = '#ffffff'
+let currentColor = '#000000'
 
 const divContainer = document.getElementById("container");
 const clearBtn = document.getElementById("clear");
+const colorPicker = document.getElementById('colorPicker');
+
+colorPicker.oninput = (e) => setCurrentColor(e.target.value);
+
+function setCurrentColor(newColor) {
+    currentColor = newColor
+}
 
 function makeRows(rows, cols) {
     divContainer.style.setProperty('--grid-rows', rows);
@@ -22,13 +31,22 @@ function removeAllChildNodes(divContainer) {
     }
 }
 
+// testing mouseDown function
+
+let mouseDown = false
+document.body.onmousedown = () => (mouseDown = true)
+document.body.onmouseup = () => (mouseDown = false)
+
 
 // Set a hover effect when divs are moused over
 divContainer.addEventListener('mouseover', function(e) {
-    console.log(e);
-    if (e.target.className == 'grid-item') {
-        e.target.classList.add('black');
+    if (mouseDown) {
+
+            e.target.style.backgroundColor = currentColor;
+            e.target.classList.add('filled');
+
     }
+    
 })
 
 
@@ -51,9 +69,10 @@ sizeBtn.addEventListener('click', function(){
 let gridItem = document.getElementsByClassName('grid-item');
 
 clearBtn.addEventListener('click', function(e) {
-    let blkDivs = document.querySelectorAll('.black');
+    let blkDivs = document.querySelectorAll('.filled');
     blkDivs.forEach( function(element){
-        element.classList.remove('black');
+        element.classList.remove('filled');
+        element.style.backgroundColor = defaultColor;
     })
 })
 
